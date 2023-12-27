@@ -66,13 +66,23 @@ public class MatrixOperations {
         int cols = matrix[0].length;
 
         for (int j = 0; j < cols; j++) {
-            short minElement = matrix[0][j];
-            for (int i = 1; i < matrix.length; i++) {
-                if (matrix[i][j] < minElement) {
-                    minElement = matrix[i][j];
+            short minElement = 0;
+            boolean firstNonZeroFound = false;
+
+            for (int i = 0; i < matrix.length; i++) {
+                if (matrix[i][j] != 0) {
+                    if (!firstNonZeroFound || matrix[i][j] < minElement) {
+                        minElement = matrix[i][j];
+                        firstNonZeroFound = true;
+                    }
                 }
             }
-            System.out.println("Стовпець " + j + ": " + minElement);
+
+            if (firstNonZeroFound) {
+                System.out.println("Стовпець " + (j + 1) + ": " + minElement);
+            } else {
+                System.out.println("Стовпець " + (j + 1) + ": усі елементи стовпця рівні 0");
+            }
         }
     }
 }
